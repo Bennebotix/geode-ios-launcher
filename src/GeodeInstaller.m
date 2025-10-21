@@ -24,7 +24,7 @@ typedef void (^DecompressCompletion)(NSError* _Nullable error);
 			return dispatch_async(dispatch_get_main_queue(), ^{
 				[Utils showError:_root title:@"launcher.error.req-failed".loc error:error];
 				[self.root updateState];
-				AppLog(@"Error during request: %@", error);
+				AppLog(@"Error during request for (%@): %@", [Utils getGeodeReleaseURL], error);
 			});
 		}
 		if (data) {
