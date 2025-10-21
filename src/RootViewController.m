@@ -547,7 +547,7 @@
 				return dispatch_async(dispatch_get_main_queue(), ^{
 					[Utils showError:self title:@"launcher.error.req-failed".loc error:error];
 					[self updateState];
-					AppLog(@"Error during request: %@", error);
+					AppLog(@"Error during request for \"%@\": %@", [NSString stringWithFormat:@"%@", b64], error);
 				});
 			}
 			if (data) {
