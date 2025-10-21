@@ -35,7 +35,6 @@ typedef void (^DecompressCompletion)(NSError* _Nullable error);
 					[Utils showError:_root title:@"launcher.error.json-failed".loc error:jsonError];
 					[self.root updateState];
 					AppLog(@"Error during JSON: %@", error);
-			        AppLog(@"Starting Geode download from URL: %@", downloadURL);
 				});
 			}
 			if ([jsonObject isKindOfClass:[NSDictionary class]]) {
@@ -60,6 +59,7 @@ typedef void (^DecompressCompletion)(NSError* _Nullable error);
 							if ([assetName isKindOfClass:[NSString class]]) {
 								if ([assetName hasSuffix:@"-ios.zip"]) {
 									NSString* downloadURL = asset[@"browser_download_url"];
+			                        AppLog(@"Starting Geode download from URL: %@", downloadURL);
 									if ([downloadURL isKindOfClass:[NSString class]]) {
 										dispatch_async(dispatch_get_main_queue(), ^{
 											[_root progressVisibility:NO];
