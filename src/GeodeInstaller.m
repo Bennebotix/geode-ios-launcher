@@ -35,6 +35,7 @@ typedef void (^DecompressCompletion)(NSError* _Nullable error);
 					[Utils showError:_root title:@"launcher.error.json-failed".loc error:jsonError];
 					[self.root updateState];
 					AppLog(@"Error during JSON: %@", error);
+			        AppLog(@"Starting Geode download from URL: %@", downloadURL);
 				});
 			}
 			if ([jsonObject isKindOfClass:[NSDictionary class]]) {
@@ -63,19 +64,7 @@ typedef void (^DecompressCompletion)(NSError* _Nullable error);
 										dispatch_async(dispatch_get_main_queue(), ^{
 											[_root progressVisibility:NO];
 											_root.optionalTextLabel.text = @"launcher.status.download-geode".loc;
-                                            
-                                            AppLog(@"Starting Geode download from URL: %@", downloadURL);
-
-											NSString* docPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-											NSString* urlLogPath = [docPath stringByAppendingPathComponent:@"geode_download_url.txt"];
-											NSError* writeError;
-											[downloadURL writeToFile:urlLogPath atomically:YES encoding:NSUTF8StringEncoding error:&writeError];
-											if (writeError) {
-											    AppLog(@"Failed to write download URL to file: %@", writeError);
-											} else {
-											    AppLog(@"Saved download URL to %@", urlLogPath);
-											}
-                                            
+											
 											NSURLSession* session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:self
 																							 delegateQueue:nil];
 											downloadTask = [session downloadTaskWithURL:[NSURL URLWithString:downloadURL]];
