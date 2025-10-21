@@ -280,7 +280,7 @@ typedef void (^DecompressCompletion)(NSError* _Nullable error);
 
 // updating
 - (void)URLSession:(NSURLSession*)session downloadTask:(NSURLSessionDownloadTask*)downloadTask didFinishDownloadingToURL:(NSURL*)url {
-    AppLog(@"Finished download. Request URL: %@; Temp file URL: %@", downloadTask.originalRequest.URL.absoluteString, url.path);
+    // AppLog(@"Finished download. Request URL: %@; Temp file URL: %@", downloadTask.originalRequest.URL.absoluteString, url.path);
 
 	NSFileManager* fm = [NSFileManager defaultManager];
 	NSString* docPath = [fm URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask].lastObject.path;
